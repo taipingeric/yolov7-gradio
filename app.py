@@ -9,7 +9,7 @@ from utils.general import check_img_size, non_max_suppression, \
     scale_coords
 from utils.plots import plot_one_box
 from utils.torch_utils import time_synchronized
-
+import time
 
 
 
@@ -78,8 +78,10 @@ def detect(img,model,device,iou_threshold=0.45,confidence_threshold=0.25):
 
     # Inference
     t1 = time_synchronized()
+    start = time.time()
     with torch.no_grad():   # Calculating gradients would cause a GPU memory leak
         pred = model(img,augment=True)[0]
+    fps_inference = 1/(time.time()-start)
     t2 = time_synchronized()
 
     # Apply NMS
@@ -97,7 +99,7 @@ def detect(img,model,device,iou_threshold=0.45,confidence_threshold=0.25):
                 label = f'{names[int(cls)]} {conf:.2f}'
                 plot_one_box(xyxy, imgs, label=label, color=colors[int(cls)], line_thickness=2)
 
-    return imgs 
+    return imgs,fps_inference
 
 def inference(img,model_link,iou_threshold,confidence_threshold):
     print(model_link)
@@ -118,16 +120,17 @@ def inference2(video,model_link,iou_threshold,confidence_threshold):
     fps = frames.get(cv2.CAP_PROP_FPS)
     image_size = (int(frames.get(cv2.CAP_PROP_FRAME_WIDTH)),int(frames.get(cv2.CAP_PROP_FRAME_HEIGHT)))
     finalVideo = cv2.VideoWriter('output.mp4',cv2.VideoWriter_fourcc(*'VP90'), fps, image_size)
-    p = 1
+    fps_video = []
     while frames.isOpened():
         ret,frame = frames.read()
         if not ret:
             break
-        frame = detect(frame,model,device,iou_threshold,confidence_threshold)
+        frame,fps = detect(frame,model,device,iou_threshold,confidence_threshold)
+        fps_video.append[fps]
         finalVideo.write(frame)
     frames.release()
     finalVideo.release()
-    return 'output.mp4'
+    return 'output.mp4',np.mean(fps_video)
 
 
 
@@ -145,6 +148,7 @@ with gr.Blocks() as demo:
         with gr.Row():
             image_input = gr.Image(type='pil', label="Input Image", source="upload")
             image_output = gr.Image(type='pil', label="Output Image", source="upload")
+        fps_image = gr.Number(0,label='FPS')
         image_drop = gr.Dropdown(choices=models,value=models[0])
         image_iou_threshold = gr.Slider(label="IOU Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.45)
         image_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
@@ -155,6 +159,7 @@ with gr.Blocks() as demo:
         with gr.Row():
             video_input = gr.Video(type='pil', label="Input Image", source="upload")
             video_output = gr.Video(type="pil", label="Output Image",format="mp4")
+        fps_video = gr.Number(0,label='FPS')
         video_drop = gr.Dropdown(choices=models,value=models[0])
         video_iou_threshold = gr.Slider(label="IOU Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.45)
         video_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
@@ -167,9 +172,9 @@ with gr.Blocks() as demo:
 
     text_button.click(inference, inputs=[image_input,image_drop,
                                          image_iou_threshold,image_conf_threshold],
-                                        outputs=image_output)
+                                        outputs=[image_output,fps_image])
     video_button.click(inference2, inputs=[video_input,video_drop,
                                            video_iou_threshold,video_conf_threshold],            
-                                        outputs=video_output)
+                                        outputs=[video_output,fps_video])
 
 demo.launch()
