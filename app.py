@@ -52,9 +52,8 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleu
 #          'hair drier', 'toothbrush']
 names = ['healthy', 'mild', 'medium', 'severe']
 
-
-colors = [[random.randint(0, 255) for _ in range(3)] for _ in names]
-colors = [[0, 255, 0], [0, 255, 255], [255, 0, 0], [177, 91, 255]]
+# 綠 青 紅 紫
+colors = [[0, 255, 0], [0, 255, 255], [255, 0, 0], [177, 91, 255]] 
 
 
 def detect(img,model,device,iou_threshold=0.45,confidence_threshold=0.25):   
