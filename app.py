@@ -177,4 +177,4 @@ with gr.Blocks() as demo:
                                            video_iou_threshold,video_conf_threshold],            
                                         outputs=[video_output,fps_video])
 
-demo.launch()
+demo.launch(share=True)
