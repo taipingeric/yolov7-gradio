@@ -135,9 +135,9 @@ def inference2(video,model_link,iou_threshold,confidence_threshold):
 
 
 
-examples_images = ['data/images/horses.jpg',
-            'data/images/bus.jpg',
-            'data/images/zidane.jpg']
+examples_images = ['data/images/non_perio_1021.tif_0.png',
+            'data/images/perio_2932.tif_0.png']
+
 examples_videos = [] 
 
 models = ['yolov7','yolov7x','yolov7-w6','yolov7-d6','yolov7-e6e']
