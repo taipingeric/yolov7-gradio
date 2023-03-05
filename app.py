@@ -54,6 +54,7 @@ names = ['healthy', 'mild', 'medium', 'severe']
 
 
 colors = [[random.randint(0, 255) for _ in range(3)] for _ in names]
+colors = [[0, 255, 0], [255, 0, 0], [0, 255, 255], [177, 91, 255]]
 
 
 def detect(img,model,device,iou_threshold=0.45,confidence_threshold=0.25):   
