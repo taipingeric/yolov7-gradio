@@ -143,9 +143,10 @@ examples_videos = []
 models = ['yolov7','yolov7x','yolov7-w6','yolov7-d6','yolov7-e6e']
 
 with gr.Blocks() as demo:
-    gr.Markdown("## YOLOv7 Inference")
+    gr.Markdown("## 經國管理暨健康學院")
+    gr.Markdown("## AI 牙助")
     with gr.Tab("Image"):
-        gr.Markdown("## YOLOv7 Inference on Image")
+        gr.Markdown("## 請輸入全口X光攝影")
         with gr.Row():
             image_input = gr.Image(type='pil', label="Input Image", source="upload")
             image_output = gr.Image(type='pil', label="Output Image", source="upload")
@@ -154,7 +155,7 @@ with gr.Blocks() as demo:
         image_iou_threshold = gr.Slider(label="IOU Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.45)
         image_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
         gr.Examples(examples=examples_images,inputs=image_input,outputs=image_output)
-        text_button = gr.Button("Detect")
+        text_button = gr.Button("偵測")
     with gr.Tab("Video"):
         gr.Markdown("## YOLOv7 Inference on Video")
         with gr.Row():
