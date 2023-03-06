@@ -55,6 +55,13 @@ names = ['healthy', 'mild', 'medium', 'severe']
 # 綠 青 紅 紫
 colors = [[0, 255, 0], [0, 255, 255], [255, 0, 0], [177, 91, 255]] 
 
+# Init model
+print("Init model")
+
+# Load model
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu') 
+model_path = 'weights/yolov7.pt'
+model = attempt_load(model_path, map_location=device)
 
 def detect(img,model,device,iou_threshold=0.45,confidence_threshold=0.25):   
     imgsz = 640
@@ -104,10 +111,6 @@ def detect(img,model,device,iou_threshold=0.45,confidence_threshold=0.25):
 
 def inference(img,model_link,iou_threshold,confidence_threshold):
     print(model_link)
-    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    # Load model
-    model_path = 'weights/'+str(model_link)+'.pt'
-    model = attempt_load(model_path, map_location=device) 
     return detect(img,model,device,iou_threshold,confidence_threshold)
 
 
