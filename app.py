@@ -162,7 +162,7 @@ with gr.Blocks() as demo:
         gr.Examples(examples=examples_images,
                     inputs=image_input,
                     outputs=image_output,
-                    examples_per_page=12)
+                    examples_per_page=6)
         text_button = gr.Button("牙周骨質流失偵測")
 #     with gr.Tab("Video"):
 #         gr.Markdown("## YOLOv7 Inference on Video")
