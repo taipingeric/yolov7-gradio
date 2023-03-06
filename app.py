@@ -145,7 +145,8 @@ examples_images = ['data/images/non_perio_1021.tif_0.png', 'data/images/non_peri
 
 examples_videos = [] 
 
-models = ['yolov7','yolov7x','yolov7-w6','yolov7-d6','yolov7-e6e']
+models = ['yolov7']
+# models = ['yolov7','yolov7x','yolov7-w6','yolov7-d6','yolov7-e6e']
 
 with gr.Blocks() as demo:
     gr.Markdown("## 經國管理暨健康學院")
