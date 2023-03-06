@@ -159,27 +159,27 @@ with gr.Blocks() as demo:
         image_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
         gr.Examples(examples=examples_images,inputs=image_input,outputs=image_output)
         text_button = gr.Button("牙周骨質流失偵測")
-    with gr.Tab("Video"):
-        gr.Markdown("## YOLOv7 Inference on Video")
-        with gr.Row():
-            video_input = gr.Video(type='pil', label="Input Image", source="upload")
-            video_output = gr.Video(type="pil", label="Output Image",format="mp4")
-        fps_video = gr.Number(0,label='FPS')
-        video_drop = gr.Dropdown(choices=models,value=models[0])
-        video_iou_threshold = gr.Slider(label="IOU Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.45)
-        video_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
-        gr.Examples(examples=examples_videos,inputs=video_input,outputs=video_output)
-        video_button = gr.Button("Detect")
+#     with gr.Tab("Video"):
+#         gr.Markdown("## YOLOv7 Inference on Video")
+#         with gr.Row():
+#             video_input = gr.Video(type='pil', label="Input Image", source="upload")
+#             video_output = gr.Video(type="pil", label="Output Image",format="mp4")
+#         fps_video = gr.Number(0,label='FPS')
+#         video_drop = gr.Dropdown(choices=models,value=models[0])
+#         video_iou_threshold = gr.Slider(label="IOU Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.45)
+#         video_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
+#         gr.Examples(examples=examples_videos,inputs=video_input,outputs=video_output)
+#         video_button = gr.Button("Detect")
     
-    with gr.Tab("Webcam Video"):
-        gr.Markdown("## YOLOv7 Inference on Webcam Video")
-        gr.Markdown("Coming Soon")
+#     with gr.Tab("Webcam Video"):
+#         gr.Markdown("## YOLOv7 Inference on Webcam Video")
+#         gr.Markdown("Coming Soon")
 
     text_button.click(inference, inputs=[image_input,image_drop,
                                          image_iou_threshold,image_conf_threshold],
                                         outputs=[image_output,fps_image])
-    video_button.click(inference2, inputs=[video_input,video_drop,
-                                           video_iou_threshold,video_conf_threshold],            
-                                        outputs=[video_output,fps_video])
+#     video_button.click(inference2, inputs=[video_input,video_drop,
+#                                            video_iou_threshold,video_conf_threshold],            
+#                                         outputs=[video_output,fps_video])
 
 demo.launch(share=True)
