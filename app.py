@@ -138,8 +138,10 @@ def inference2(video,model_link,iou_threshold,confidence_threshold):
 
 
 
-examples_images = ['data/images/non_perio_1021.tif_0.png',
-            'data/images/perio_2932.tif_0.png']
+examples_images = ['data/images/non_perio_1021.tif_0.png', 'data/images/non_perio_1035.tif_0.png', 'data/images/non_perio_1043.tif_0.png', 
+                   'data/images/non_perio_1059.tif_0.png', 'data/images/non_perio_669.tif_0.png', 'data/images/non_perio_684.tif_0.png', 
+                   'data/images/perio_2136.tif_0.png', 'data/images/perio_2137.tif_0.png', 'data/images/perio_2466.tif_0.png', 
+                   'data/images/perio_2471.tif_0.png', 'data/images/perio_2827.tif_0.png', 'data/images/perio_2932.tif_0.png']
 
 examples_videos = [] 
 
