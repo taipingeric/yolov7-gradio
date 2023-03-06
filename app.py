@@ -159,7 +159,10 @@ with gr.Blocks() as demo:
         image_drop = gr.Dropdown(choices=models,value=models[0])
         image_iou_threshold = gr.Slider(label="IOU Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.45)
         image_conf_threshold = gr.Slider(label="Confidence Threshold",interactive=True, minimum=0.0, maximum=1.0, value=0.25)
-        gr.Examples(examples=examples_images,inputs=image_input,outputs=image_output)
+        gr.Examples(examples=examples_images,
+                    inputs=image_input,
+                    outputs=image_output,
+                    examples_per_page=12)
         text_button = gr.Button("牙周骨質流失偵測")
 #     with gr.Tab("Video"):
 #         gr.Markdown("## YOLOv7 Inference on Video")
