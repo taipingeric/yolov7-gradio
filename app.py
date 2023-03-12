@@ -150,9 +150,9 @@ models = ['yolov7']
 
 with gr.Blocks() as demo:
     gr.Markdown("## 經國管理暨健康學院")
-    gr.Markdown("## AI 牙助")
+    gr.Markdown("## 環口X-ray影像於牙周骨質流失之AI判讀應用")
     with gr.Tab("Image"):
-        gr.Markdown("## 請輸入全口X光攝影")
+        gr.Markdown("## 請輸入環口X-ray影像")
         with gr.Row():
             image_input = gr.Image(type='pil', label="Input Image", source="upload")
             image_output = gr.Image(type='pil', label="Output Image", source="upload")
